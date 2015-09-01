@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Initial State SDK",
   "main": "index.js",
-  "readme": "Initial State SDK",
   "keywords": [
     "initial state",
     "sdk"
