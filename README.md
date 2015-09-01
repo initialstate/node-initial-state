@@ -5,13 +5,13 @@ The Initial State SDK for NodeJS.
 
 ## Installation
 
-```
+```sh
 npm install initial-state
 ```
 
 ## Example Use
 
-```
+```javascript
 var IS = require('initial-state');
 var bucket = IS.bucket('NodeJS SDK Example', 'YOUR_ACCESS_KEY_GOES_HERE');
 
@@ -41,4 +41,4 @@ Push a new event to a bucket. ...wat?
 
 * *key* – The event key.
 * *value* – The event value.
-* *date* – The time of the event. A `Date` object or numeric timestamp (milliseconds since epoch). High-precision timestamps (i.e., sub-ms) can be declared as a string (e.g., '1420070400.000000001'), but must be in unix time (seconds since epoch). If not defined, a high-precision timestamp will be generated.
+* *date* – The time of the event. A `Date` object or numeric timestamp (milliseconds since epoch). High-precision timestamps (i.e., sub-ms) can be declared as a string (e.g., `'1420070400.000000001'`), but must be in unix time (seconds since epoch). If not defined, a high-precision timestamp will be generated.
