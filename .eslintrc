@@ -1,0 +1,81 @@
+root:
+  true
+
+env:
+  node: true
+  es6: true
+
+rules:
+  indent:
+    - 1
+    - "tab"
+  camelcase: 1
+  strict:
+    - 2
+    - "global"
+  brace-style:
+    - 1
+    - "1tbs"
+  comma-style:
+    - 1
+    - "last"
+  no-floating-decimal: 1
+  space-after-keywords:
+    - 1
+    - "always"
+  space-before-blocks: 1
+  spaced-comment:
+    - 1
+    - "always"
+    - exceptions:
+      - '-'
+  radix: 2
+  valid-jsdoc:
+    - 1
+    - prefer:
+        return: "returns"
+  wrap-iife: 2
+  guard-for-in: 2
+  no-alert: 2
+  curly:
+    - 2
+    - "all"
+  eqeqeq:
+    - 2
+    - "allow-null"
+  no-empty: 2
+  no-use-before-define:
+    - 1
+    - "nofunc"
+  no-obj-calls: 2
+  no-unused-vars:
+    - 1
+    - vars: "local"
+      args: "after-used"
+  new-cap: 2
+  no-shadow: 2
+  no-invalid-regexp: 2
+  comma-dangle:
+    - 1
+    - "never"
+  comma-spacing:
+    - 1
+    - before: false
+      after: true
+  semi-spacing:
+    - 1
+    - before: false
+      after: true
+  no-undef: 2
+  no-new: 2
+  no-extra-semi: 1
+  no-debugger: 2
+  no-caller: 2
+  semi: 2
+  quotes:
+    - 1
+    - "single"
+    - "avoid-escape"
+  no-unreachable: 2
+  eol-last: 1
+  key-spacing: 1

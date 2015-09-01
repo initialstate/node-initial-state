@@ -1,0 +1,25 @@
+{
+  "name": "initial-state",
+  "version": "0.1.0",
+  "description": "Initial State SDK",
+  "main": "index.js",
+  "readme": "Initial State SDK",
+  "keywords": [
+    "initial state",
+    "sdk"
+  ],
+  "author": "InitialState",
+  "license": "MIT",
+  "homepage": "https://github.com/InitialState/node-initial-state",
+  "repository": "InitialState/node-initial-state",
+  "bugs": {
+    "url": "https://github.com/InitialState/node-initial-state/issues"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "gulp-eslint": "^1.0.0"
+  }
+}
