@@ -33,7 +33,7 @@ setTimeout(function () {
 Open a bucket for event data. ...wat?
 
 * *id* – A bucket key. This key cannot contain the colon (:) character.
-* *accessKey* – An Initial State account access key. If this value is not defined, the `process.env.IS_API_ACCESS_KEY` will be used.
+* *accessKey* – An Initial State account access key. This argument is not needed if the access key is assigned to the environmental variable `IS_API_ACCESS_KEY`.
 
 ### bucket.push(key, value[, date])
 
