@@ -1,19 +1,32 @@
 'use strict';
 
-function EpochClock() {
-	if (!(this instanceof EpochClock)) {
-		return new EpochClock();
-	}
-	this.epoch = Date.now();
-	this.start = process.hrtime();
-}
+var epoch = Date.now(),
+	start = process.hrtime();
 
-EpochClock.prototype.now = function () {
+function now() {
 	// get unix timestamp (seconds since epoch) with high-precision
-	var elapsed = process.hrtime(this.start),
+	var elapsed = process.hrtime(start),
 		ms = elapsed[1] / 1e6,
 		subms = ms % 1;
-	return ((this.epoch + ms - subms) / 1e3 + elapsed[0]).toFixed(3) + subms.toFixed(6).slice(2);
-};
+	return ((epoch + ms - subms) / 1e3 + elapsed[0]).toFixed(3) + subms.toFixed(6).slice(2);
+}
+exports.now = now;
 
-module.exports = EpochClock;
+function toTimestamp(value) {
+	if (typeof value === 'string') {
+		if (isFinite(+value)) {
+			// Accept pre-defined
+			return value;
+		}
+		value = Date.parse(value);
+	}
+	if (typeof value === 'number' && isFinite(value)) {
+		// ms -> sec
+		return (value / 1000).toString();
+	}
+	if (typeof value === 'undefined') {
+		return now();
+	}
+	return void 0;
+}
+exports.toTimestamp = toTimestamp;

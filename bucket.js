@@ -1,16 +1,19 @@
 'use strict';
 
+var EventEmitter = require('events').EventEmitter;
 var request = require('./https-request');
 var Clock = require('./epoch-clock');
 var API_HOST = 'groker.initialstate.com';
+
 
 function Bucket(name, id, accessKey) {
 	if (!(this instanceof Bucket)) {
 		return new Bucket(name, id, accessKey);
 	}
 
-	var clock = new Clock(),
-		bucket = this,
+	EventEmitter.call(this);
+
+	var bucket = this,
 		buffer = [],
 		verified = false,
 		sending = false,
@@ -27,7 +30,7 @@ function Bucket(name, id, accessKey) {
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
 				'Accept-Version': '0.0.1',
-				'X-IS-AccessKey': accessKey || process.env.IS_API_ACCESS_KEY
+				'X-IS-AccessKey': accessKey
 			}
 		};
 
@@ -41,29 +44,11 @@ function Bucket(name, id, accessKey) {
 		}
 	}
 
-	function toEpoch(value) {
-		if (typeof value === 'string') {
-			if (isFinite(+value)) {
-				// Accept pre-defined
-				return value;
-			}
-			value = Date.parse(value);
-		}
-		if (typeof value === 'number') {
-			// ms -> sec
-			return (value / 1000).toString();
-		}
-		if (typeof value === 'undefined') {
-			return clock.now();
-		}
-		return void 0;
-	}
-
 	this.push = function (key, value, date) {
 		pushEvent({
 			key: (typeof key === 'string') ? key : String(key),
 			value: (typeof value === 'string') ? value : String(value),
-			epoch: toEpoch(date)
+			epoch: Clock.toTimestamp(date)
 		});
 	};
 
@@ -90,7 +75,7 @@ function Bucket(name, id, accessKey) {
 			sending = true;
 			var events = buffer.splice(0, len);
 			request(eventHttp, events, sent);
-			bucket.emit('send', events);
+			bucket.emit('data', events);
 		}
 	}
 
@@ -102,7 +87,7 @@ function Bucket(name, id, accessKey) {
 	}
 
 	// Create/verify bucket before sending data
-	request(eventHttp, bucketData, function (err) {
+	request(eventHttp, bucketData, function (err, status) {
 		if (err) {
 			bucket.emit('error', err);
 			return;
@@ -112,17 +97,16 @@ function Bucket(name, id, accessKey) {
 		eventHttp.path = '/api/events';
 		eventHttp.headers['X-IS-BucketKey'] = bucketData.bucketKey;
 
-		bucket.emit('ready', bucket);
+		bucket.emit('ready', status === 201);
 		// bucket exists, start sending events
 		verified = true;
 		if (buffer.length > 0) {
 			flushSoon();
 		}
 	});
-
 }
 
-Bucket.prototype = Object.create(require('events').EventEmitter.prototype, {
+Bucket.prototype = Object.create(EventEmitter.prototype, {
 	constructor: { value: Bucket }
 });
 
@@ -133,5 +117,7 @@ module.exports = function createBucket(name, id, accessKey) {
 		id = name;
 	}
 
-	return new Bucket(name, id, accessKey);
+	return new Bucket(name, id, accessKey || process.env.IS_API_ACCESS_KEY);
 };
+
+module.exports.Bucket = Bucket;

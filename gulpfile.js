@@ -12,7 +12,13 @@ gulp.task('lint', function () {
 });
 
 gulp.task('test', ['lint'], function () {
+	var mocha = require('gulp-mocha');
 
+	return gulp.src('test/*.test.js', {read: false})
+		.pipe(mocha({
+			reporter: 'spec',
+			timeout: 2000
+		}));
 });
 
 gulp.task('default', ['test']);
