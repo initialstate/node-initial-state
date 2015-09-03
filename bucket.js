@@ -97,12 +97,13 @@ function Bucket(name, id, accessKey) {
 		eventHttp.path = '/api/events';
 		eventHttp.headers['X-IS-BucketKey'] = bucketData.bucketKey;
 
-		bucket.emit('ready', status === 201);
 		// bucket exists, start sending events
 		verified = true;
 		if (buffer.length > 0) {
 			flushSoon();
 		}
+
+		bucket.emit('ready', status === 201);
 	});
 }
 
