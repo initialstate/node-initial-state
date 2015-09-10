@@ -118,7 +118,7 @@ module.exports = function createBucket(name, id, accessKey) {
 		id = name;
 	}
 
-	return new Bucket(name, id, accessKey || process.env.IS_API_ACCESS_KEY);
+	return new Bucket(name, id, accessKey || process.env.IS_API_ACCESS_KEY || '');
 };
 
 module.exports.Bucket = Bucket;
