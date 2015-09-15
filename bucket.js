@@ -111,11 +111,16 @@ Bucket.prototype = Object.create(EventEmitter.prototype, {
 	constructor: { value: Bucket }
 });
 
-module.exports = function createBucket(name, id, accessKey) {
-	if (arguments.length < 3) {
-		// (id, accessKey) or (id)
-		accessKey = id;
-		id = name;
+module.exports = function createBucket(id, accessKey) {
+	// (id/name, accessKey)
+	var name = id;
+	if (id != null && typeof id !== 'string' && typeof id.id === 'string') {
+		// ({ name, id }, accessKey) || ({ id, name, accessKey })
+		name = (typeof id.name === 'string') ? id.name : id.id;
+		if (typeof id.accessKey === 'string' && !accessKey) {
+			accessKey = id.accessKey;
+		}
+		id = id.id;
 	}
 
 	return new Bucket(name, id, accessKey || process.env.IS_API_ACCESS_KEY || '');

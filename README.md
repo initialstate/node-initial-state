@@ -30,14 +30,14 @@ setTimeout(function () {
 
 #### IS.bucket(id, accessKey)
 
-Open a bucket for event data. ...wat?
+Create an event data bucket.
 
 * *id* – A bucket key. This key cannot contain the colon (:) character.
 * *accessKey* – An Initial State account access key. This argument is not needed if the access key is assigned to the environmental variable `IS_API_ACCESS_KEY`.
 
 ### bucket.push(key, value[, date])
 
-Push a new event to a bucket. ...wat?
+Send event data to Initial State.
 
 * *key* – The event key.
 * *value* – The event value.

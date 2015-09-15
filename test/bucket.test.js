@@ -57,7 +57,7 @@ does.describe('Buckets', function () {
 
 		var newId = 'new-id',
 			newName = 'new-name',
-			bucket = isBucket(newName, newId, 'valid-key');
+			bucket = isBucket({ id: newId, name: newName }, 'valid-key');
 
 		assert.strictEqual(bucket.id, newId, 'bucket ID matches constructor argument');
 		assert.strictEqual(bucket.name, newName, 'bucket name matches constructor argument');

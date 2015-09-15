@@ -65,7 +65,7 @@ does.describe('Events', function () {
 		var count = 0;
 
 		bucket.push('event-type', 'event-value', now);
-		
+
 		bucket.once('data', function (events) {
 				assert.isArray(events);
 				assert.strictEqual(events[0].key, 'event-type', 'Event has expected "key"');
@@ -82,7 +82,7 @@ does.describe('Events', function () {
 
 	});
 
-	does.it('buffer multiple event', function (done) {
+	does.it('send multiple events at once', function (done) {
 
 		var count = 0,
 			values = ['A','B','C','D','E','F','G','H','I','J'];
@@ -90,7 +90,7 @@ does.describe('Events', function () {
 		values.forEach(function (value) {
 			bucket.push('event-type', value, now);
 		});
-		
+
 		bucket.once('data', function (events) {
 				assert.isArray(events);
 				assert.sameMembers(events.map(function (event) {
@@ -127,5 +127,12 @@ does.describe('Events', function () {
 	does.it('handles API overflow');
 
 	does.it('handles API error');
+
+	does.it('buffers when offline');
+
+	does.it('buffers until bucket exists');
+
+	does.it('flushes on process exit');
+
 
 });
