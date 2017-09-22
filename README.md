@@ -1,7 +1,7 @@
 # Initial State
 The Initial State SDK for NodeJS.
 
-[![Build Status](https://travis-ci.org/InitialState/node-initial-state.svg)](https://travis-ci.org/InitialState/node-initial-state)
+[![Build Status](https://travis-ci.org/initialstate/node-initial-state.svg)](https://travis-ci.org/initialstate/node-initial-state)
 
 ## Installation
 
