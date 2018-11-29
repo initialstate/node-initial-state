@@ -17,10 +17,15 @@ var bucket = IS.bucket('BUCKET_KEY', 'YOUR_ACCESS_KEY_GOES_HERE');
 
 // Push a count every second
 var count = 0;
-setTimeout(function () {
+setTimeout(function pushNextCount() {
 
 	// Push another event
-	bucket.push('Demo Count', ++count);
+	bucket.push('Count', ++count);
+
+	if (count < 10) {
+		// Keep counting until we reach 10
+		setTimeout(pushNextCount, 1000);
+	}
 
 }, 1000);
 ```
