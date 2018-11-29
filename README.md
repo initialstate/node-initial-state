@@ -34,7 +34,7 @@ Create an event data bucket.
 * *id* – A bucket key. This key should contain only alphanumeric and underscore characters. If the bucket does not yet exist, this value will be used as the bucket name.
 * *accessKey* – An Initial State account access key. This argument is not needed if the access key is assigned to the environmental variable `IS_API_ACCESS_KEY`.
 
-To declare different a bucket key and name, use the object override parameter:
+To declare a different bucket key and name, use the object override parameter:
 
 ```javascript
 var bucket = IS.bucket({
