@@ -13,15 +13,14 @@ npm install initial-state
 
 ```javascript
 var IS = require('initial-state');
-var bucket = IS.bucket('NodeJS SDK Example', 'YOUR_ACCESS_KEY_GOES_HERE');
+var bucket = IS.bucket('BUCKET_KEY', 'YOUR_ACCESS_KEY_GOES_HERE');
 
-// Push event to initial state
-bucket.push('Demo State', 'active');
-
+// Push a count every second
+var count = 0;
 setTimeout(function () {
 
 	// Push another event
-	bucket.push('Demo State', 'inactive');
+	bucket.push('Demo Count', ++count);
 
 }, 1000);
 ```
@@ -32,8 +31,18 @@ setTimeout(function () {
 
 Create an event data bucket.
 
-* *id* – A bucket key. This key cannot contain the colon (:) character.
+* *id* – A bucket key. This key should contain only alphanumeric and underscore characters. If the bucket does not yet exist, this value will be used as the bucket name.
 * *accessKey* – An Initial State account access key. This argument is not needed if the access key is assigned to the environmental variable `IS_API_ACCESS_KEY`.
+
+To declare different a bucket key and name, use the object override parameter:
+
+```javascript
+var bucket = IS.bucket({
+	name: 'My Bucket',
+	id: 'BUCKET_KEY',
+	accessKey: 'YOUR_ACCESS_KEY_GOES_HERE'
+});
+```
 
 ### bucket.push(key, value[, date])
 

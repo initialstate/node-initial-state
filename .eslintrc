@@ -69,9 +69,9 @@ rules:
   comma-style:
     - 1
     - "last"
-  space-after-keywords:
+  keyword-spacing:
     - 1
-    - "always"
+    - { "after": true }
   valid-jsdoc:
     - 1
     - prefer:
